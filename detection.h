@@ -105,12 +105,12 @@ int calNoise (noiseStruct *noiseStructure, controlStruct *control)
 	int nchn, nsubint;
 	long seed;
 	int i;
-	int n = 10*control->n;
+	int n = control->n;
 
 	float *var_n;
 	var_n = (float*)malloc(sizeof(float)*n);
 
-	noiseStructure->n = 10*control->n; 
+	noiseStructure->n = control->n; 
 	noiseStructure->whiteLevel = control->whiteLevel; // mJy
 	noiseStructure->nchn = control->nchan; 
 	noiseStructure->nsubint = control->nsub; 
@@ -221,6 +221,7 @@ int calculateNDynSpec (acfStruct *acfStructure, controlStruct *control, noiseStr
 		var = variance (acfStructure->dynPlot, nsub*nchan);
 		//var[i] = variance (acfStructure->dynPlot, nsub*nchan);
 
+		//printf ("Var %f %f\n", var, noiseStructure->detection);
 		if (var >= noiseStructure->detection)
 		//if (var[i] >= noiseStructure->detection)
 		{
@@ -228,6 +229,7 @@ int calculateNDynSpec (acfStruct *acfStructure, controlStruct *control, noiseStr
 		}
 	}
 
+	//printf ("%d\n", num);
 	acfStructure->probability = (float)(num)/n;
 
 	//free(var);

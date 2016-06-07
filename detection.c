@@ -133,6 +133,8 @@ int main (int argc, char* argv[])
 				control.nchan = (int)(control.BW/control.chanBW);
 
 				control.whiteLevel = control.whiteLevel0*sqrt(control.nsub*control.nchan);  
+
+				//printf ("%d %d %lf\n", control.nchan, control.nsub, control.whiteLevel);
 		
 				calNoise (&noiseStructure, &control);
 				//printf ("%lf\n", control.whiteLevel);
